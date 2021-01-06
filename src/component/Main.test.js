@@ -23,7 +23,7 @@ describe("Form", () => {
     let wrapper = shallow(<Main />);
     const createButton = wrapper.find("button").at(0);
     createButton.simulate("click");
-    wrapper.setState({ title: "", author: "", description: "" });
+    wrapper.setState({ book: { title: "", author: "", description: "" } })
     const saveButton = wrapper.find("button").at(1);
     saveButton.simulate("click");
     wrapper.instance().formAddBook({ 
@@ -31,4 +31,19 @@ describe("Form", () => {
     }});
     expect(wrapper.state().errors).toEqual(["Debe ingresar un titulo", "Debe ingresar un autor", "Debe ingresar una descripcion"]);
   });
+
+  it("Should test validate and show no erros when submit form of book ", () => {
+    let wrapper = shallow(<Main />);
+    const createButton = wrapper.find("button").at(0);
+    createButton.simulate("click");
+    wrapper.setState({ book: { title: "El idiota", author: "Dostoievski", description: "a good book" } })
+    const saveButton = wrapper.find("button").at(1);
+    saveButton.simulate("click");
+    wrapper.instance().formAddBook({ 
+      preventDefault: () => {
+    }});
+    expect(wrapper.state().errors).toEqual([]);
+  });
+
+  
 });
