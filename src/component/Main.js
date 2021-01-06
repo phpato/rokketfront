@@ -24,7 +24,7 @@ class Main extends React.Component {
 
     async getItems() {
         this.setState({loading: true});
-        const servicesResponse = await axios.get('http://localhost:3000/items');
+        const servicesResponse = await axios.get('https://rokket-backend1.herokuapp.com/items');
         const {data} = await servicesResponse;
         this.setState({books: data.books, loading: false});
     }
@@ -34,7 +34,7 @@ class Main extends React.Component {
         if(this.validateForm()){
             const book = this.state.book;
             try{
-                const savedBookResponse = await axios.post('http://localhost:3000/items', book);
+                const savedBookResponse = await axios.post('https://rokket-backend1.herokuapp.com/items', book);
                 this.cleanForm();
                 this.getItems();
                 swal.fire({
@@ -55,7 +55,7 @@ class Main extends React.Component {
 
     async deleteBook(book) {
         try{
-            const deletedBookResponse = await axios.delete( `http://localhost:3000/items/${book._id}`);
+            const deletedBookResponse = await axios.delete( `https://rokket-backend1.herokuapp.com/items/${book._id}`);
             swal.fire({
                 title: "Exito",
                 text: "Libro eliminado!",

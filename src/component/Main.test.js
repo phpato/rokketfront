@@ -7,15 +7,15 @@ import { shallow, configure } from 'enzyme';
 enzyme.configure({ adapter: new Adapter() });
 test('renders button text for creation', () => {
   render(<Main />);
-  const linkElement = screen.getByText(/Crear/i);
-  expect(linkElement).toBeInTheDocument();
+  const creationButton = screen.getByText(/Crear/i);
+  expect(creationButton).toBeInTheDocument();
 });
 
 describe("Form", () => {
   it("Should test visible form to add a new book", () => {
     const wrapper = shallow(<Main />);
-    const firstButton = wrapper.find("button").at(0);
-    firstButton.simulate("click");
+    const creationButton = wrapper.find("button").at(0);
+    creationButton.simulate("click");
     expect(wrapper.state().adding).toEqual(true);
   });
 
@@ -44,6 +44,5 @@ describe("Form", () => {
     }});
     expect(wrapper.state().errors).toEqual([]);
   });
-
   
 });
